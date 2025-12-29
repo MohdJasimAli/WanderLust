@@ -1,0 +1,65 @@
+<style>
+  .btn-search{
+    background-color: #fe424d;
+    color: white;
+    border-radius: 25px;
+    padding: 0 1rem 0 1rem;
+  }
+  .search-inp{
+    border-radius: 25px;
+    padding: 0.5rem 3rem 0.5rem 3rem;
+    font-size: 1rem;
+  }
+</style>
+
+<nav class="navbar navbar-expand-md navbar-light bg-light px-4 sticky-top">
+  <a class="navbar-brand" href="/listings">
+    <i class="fa fa-compass"></i> WanderLust
+  </a>
+  <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+      <li class="nav-item">
+        <a class="nav-link" href="/listings">Explore</a>
+      </li>
+    </ul>
+  </div>
+  <form action="/listings" method="GET" class="d-flex" role="search">
+  <input
+    class="form-control me-2 search-inp"
+    type="search"
+    name="search"
+    placeholder="Search Destination"
+    aria-label="Search"
+    value="<%= searchText || '' %>"
+  />
+  <button class="btn btn-search" type="submit">
+    <i class="fa-solid fa-magnifying-glass"></i>
+  </button>
+</form>
+
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ms-auto">
+       <li class="nav-item">
+        <a class="nav-link" href="/listings/new">Add New</a>
+      </li>
+      <% if(!currUser) { %>
+        <li class="nav-item">
+        <a class="nav-link" href="/signup"><b>SignUP</b></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/login"><b>Login</b></a>
+      </li>
+      <% } %>
+
+      <% if(currUser) { %>
+      <li class="nav-item">
+        <a class="nav-link" href="/logout"><b>LogOut</b></a>
+      </li>
+      <% } %>
+    </ul>
+  </div>
+</nav>

@@ -1,0 +1,115 @@
+.navbar{
+    height: 5rem;
+    font-size: 1.2rem;
+    font-weight: bold;
+    background-color: white;
+}
+
+.fa-compass{
+    color: #FF385C;
+    font-size: 2rem;
+}
+
+.nav-link{
+    margin-right: 1rem;
+    color: #222 !important;
+}
+
+/*footer*/
+
+.f-info-links a{
+    text-decoration: none;
+    color: #222;
+    width: 100%;
+}
+
+.f-info-links a:hover{
+    text-decoration: underline;
+    color: #FF385C;
+}
+
+.f-info-socials{
+    width: 100%;
+    font-size: 1.5rem;
+    margin-right: 2rem;
+}
+
+.f-info-socials i{
+    width: 100%;
+    font-size: 1.5rem;
+    margin-right: 2rem;
+}
+
+.f-info{
+    height: 8rem;
+    background-color: gainsboro;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-evenly;
+    text-align: center;
+}
+
+.f-info-links, .f-info-socials, .f-info-brand{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+/*Cards*/
+
+.card{
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.car-img-top{
+    border-radius: 1rem;
+    width: 100%;
+    object-fit: cover;
+}
+
+.card-body{
+    padding: 0.5rem 0 !important;
+}
+
+.card-text{
+    font-weight: 300 !important;
+    font-size: 1.1rem;
+    color: #000000;
+}
+
+.card-img-overlay{
+    opacity: 0;
+    font-weight: bold !important;
+    font-size: 1.1rem;
+    color: #f13b3b;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.card-img-overlay:hover{
+    opacity: 1;
+    background-color: rgba(255, 255, 255, 0.2);
+    border-radius: 1rem;
+    transition: all 0.3s ease-in-out;
+}
+
+/*NEW*/
+
+.add-btn{
+    background-color: #f13b3b !important;
+    border: none !important;
+}
+
+.btn-edit{
+    background-color: #f13b3b !important;
+    border: none !important;
+}
+
+.btn-show{
+    background-color: #f13b3b !important;
+    border: none !important;
+}

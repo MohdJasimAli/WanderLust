@@ -1,0 +1,164 @@
+<%- layout("layouts/boilerplate") %> 
+
+<style>
+  #filters {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 1.5rem;
+    margin-top: 1rem;
+  }
+
+  .filter {
+    text-align: center;
+    opacity: 0.6;
+    cursor: pointer;
+    transition: all 0.2s ease;
+  }
+
+  .filter:hover {
+    opacity: 1;
+    color: rgb(255, 62, 62);
+  }
+
+  .taxInfo {
+    display: none;
+  }
+
+  .show-tax {
+    display: inline !important;
+  }
+
+  .tax-switch {
+    border: 1px solid black;
+    border-radius: 1rem;
+    height: 3.2rem;
+    padding: 1rem;
+    margin-left: auto;
+    display: flex;
+    align-items: center;
+  }
+</style>
+
+<!-- FILTER BAR -->
+<div id="filters">
+  <a href="/listings?category=Trending" class="filter text-decoration-none text-dark">
+    <i class="fa-solid fa-fire"></i>
+    <p>Trending</p>
+  </a>
+
+  <a href="/listings?category=Room" class="filter text-decoration-none text-dark">
+    <i class="fa-solid fa-bed"></i>
+    <p>Room</p>
+  </a>
+
+  <a href="/listings?category=Iconic Cities" class="filter text-decoration-none text-dark">
+    <i class="fa-solid fa-mountain-city"></i>
+    <p>Iconic Cities</p>
+  </a>
+
+  <a href="/listings?category=Mountains" class="filter text-decoration-none text-dark">
+    <i class="fa-solid fa-mountain"></i>
+    <p>Mountains</p>
+  </a>
+
+  <a href="/listings?category=Pools" class="filter text-decoration-none text-dark">
+    <i class="fa-solid fa-person-swimming"></i>
+    <p>Pools</p>
+  </a>
+
+  <a href="/listings?category=Castles" class="filter text-decoration-none text-dark">
+    <i class="fa-solid fa-castle"></i>
+    <p>Castles</p>
+  </a>
+
+  <a href="/listings?category=Campings" class="filter text-decoration-none text-dark">
+    <i class="fa-solid fa-campground"></i>
+    <p>Campings</p>
+  </a>
+
+  <a href="/listings?category=Farms" class="filter text-decoration-none text-dark">
+    <i class="fa-solid fa-cow"></i>
+    <p>Farms</p>
+  </a>
+
+  <a href="/listings?category=Artic" class="filter text-decoration-none text-dark">
+    <i class="fa-solid fa-snowflake"></i>
+    <p>Artic</p>
+  </a>
+
+  <!-- TAX SWITCH -->
+  <div class="tax-switch">
+    <div class="form-check form-switch">
+      <input class="form-check-input" type="checkbox" role="switch" id="switchCheckDefault">
+      <label class="form-check-label" for="switchCheckDefault">Display Taxes</label>
+    </div>
+  </div>
+</div>
+
+
+<!-- HEADER -->
+<div class="d-flex justify-content-between align-items-center mb-4 mt-4">
+  <h1>Your Choice, Our Options</h1>
+  <a href="/listings/new" class="btn btn-dark">Create New Listing</a>
+</div>
+
+<!-- LISTINGS GRID -->
+<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4 mt-3">
+
+  <% allListings.forEach((listing) => { %>
+    <% if (listing && listing._id) { %>
+
+      <div class="col">
+        <a
+          href="/listings/<%= listing._id.toString() %>"
+          class="text-decoration-none text-dark"
+        >
+          <div class="card h-100 shadow-sm">
+
+            <img
+              src="<%= listing.image && listing.image.url
+                ? listing.image.url
+                : 'https://via.placeholder.com/400x300' %>"
+              class="card-img-top"
+              alt="<%= listing.title %>"
+              style="height: 18rem; object-fit: cover;"
+            />
+
+            <div class="card-img-overlay d-flex align-items-start" style="pointer-events:none;">
+              <span class="badge bg-dark">
+                <%= listing.country %>
+              </span>
+            </div>
+
+            <div class="card-body">
+              <p class="card-text mb-1">
+                <strong><%= listing.title %></strong>
+              </p>
+              <p class="text-muted">
+                ₹<%= listing.price.toLocaleString("en-IN") %> / night
+                <span class="taxInfo"> +18% GST</span>
+              </p>
+            </div>
+
+          </div>
+        </a>
+      </div>
+
+    <% } %>
+  <% }) %>
+
+</div>
+
+<!-- SCRIPT -->
+<script>
+  const taxSwitch = document.getElementById("switchCheckDefault");
+
+  taxSwitch.addEventListener("change", () => {
+    const taxInfoElements = document.getElementsByClassName("taxInfo");
+
+    for (let info of taxInfoElements) {
+      info.classList.toggle("show-tax");
+    }
+  });
+</script>
