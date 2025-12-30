@@ -9,7 +9,7 @@ const methodOverride = require("method-override");
 const ejsMate = require("ejs-mate");
 const ExpressError = require("./utils/ExpressError.js");
 const session = require("express-session");
-const MongoStore = require('connect-mongo');
+const MongoStore = require("connect-mongo").default;
 const flash = require("connect-flash");
 const passport = require("passport");
 const localStrategy = require("passport-local");
@@ -20,7 +20,6 @@ const reviewsRouter = require("./routes/review.js");
 const userRouter = require("./routes/user.js");
 const { required } = require("joi");
 
-//const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlist";
 const dbURL = process.env.ATLASDB_URL;
 
 main()
@@ -39,16 +38,22 @@ app.use(methodOverride("_method"));
 app.engine("ejs", ejsMate);
 app.use(express.static(path.join(__dirname, "/public")));
 
-const store = MongoStore.create({
+const store = new MongoStore({
   mongoUrl: dbURL,
-  crypto:{
+  crypto: {
     secret: process.env.SECRET,
   },
-  touchAfter: 24* 3600,
+  touchAfter: 24 * 3600,
+});
+
+
+store.on("error", (err) => {
+  console.log("Error in Session Store", err);
 });
 
 const sessionOptions = {
   store,
+  name: "session",
   secret: process.env.SECRET,
   resave: false,
   saveUninitialized: true,
@@ -58,10 +63,6 @@ const sessionOptions = {
     httpOnly: true,
   },
 };
-
-store.on("error",()=>{
-  console.log("Error in Session Store",err);
-});
 
 // Home
 app.get("/", (req, res) => {
